@@ -113,7 +113,7 @@ def main():
         layout="centered"
     )
 
-    st.title("💳 Invoice Banking Information Updater")
+    st.title("💳 Stripe Invoice Banking Information Updater")
     st.markdown("Upload a Stripe-formatted invoice PDF and update the banking details")
 
     # File uploader
