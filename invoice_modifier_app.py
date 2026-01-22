@@ -19,23 +19,35 @@ def modify_invoice_pdf(pdf_bytes, bank_info):
     """
     # Open the PDF from bytes
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-    page = doc[0]
 
-    # Search for "Bank name" text to find where banking info starts
-    bank_name_search = page.search_for("Bank name")
+    # Search for "Bank name" across all pages
+    bank_name_rect = None
+    target_page = None
 
-    if not bank_name_search:
+    for page_num in range(len(doc)):
+        page = doc[page_num]
+        bank_name_search = page.search_for("Bank name")
+
+        if bank_name_search:
+            # Found "Bank name" on this page
+            # Try to find it in the lower part of the page (y > 600)
+            # or just use the first occurrence if none in lower part
+            for rect in bank_name_search:
+                if rect.y0 > 600:
+                    bank_name_rect = rect
+                    target_page = page
+                    break
+
+            # If we didn't find it in lower part, use first occurrence
+            if not bank_name_rect and bank_name_search:
+                bank_name_rect = bank_name_search[0]
+                target_page = page
+                break
+
+    if not bank_name_rect or not target_page:
         return None, "Could not find 'Bank name' in the PDF"
 
-    # Get the first occurrence in the banking section (lower part of page)
-    bank_name_rect = None
-    for rect in bank_name_search:
-        if rect.y0 > 600:
-            bank_name_rect = rect
-            break
-
-    if not bank_name_rect:
-        return None, "Could not find banking section in the PDF"
+    page = target_page
 
     # Delete from slightly above the Bank name line to catch all old text
     delete_from_y = bank_name_rect.y0 - 5
