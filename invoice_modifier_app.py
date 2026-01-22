@@ -108,7 +108,7 @@ def modify_invoice_pdf(pdf_bytes, bank_info):
 # Streamlit App
 def main():
     st.set_page_config(
-        page_title="Invoice Banking Info Updater",
+        page_title="Stripe Invoice Banking Info Updater",
         page_icon="💳",
         layout="centered"
     )
