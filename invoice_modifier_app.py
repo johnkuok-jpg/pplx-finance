@@ -61,8 +61,7 @@ def modify_invoice_pdf(pdf_bytes, bank_info):
         ("Account Type", bank_info["account_type"]),
         ("ACH Routing/ABA", bank_info["routing_number"]),
         ("Acct #", bank_info["account_number"]),
-        ("Swift/IBAN", bank_info["swift_code"]),
-        ("Reference", bank_info["reference"])
+        ("Swift/IBAN", bank_info["swift_code"])
     ]
 
     # Insert new text
@@ -122,14 +121,13 @@ def main():
 
         with col1:
             bank_name = st.text_input("Bank Name", value="Silicon Valley Bank")
-            account_name = st.text_input("Account Name", value="")
+            account_name = st.text_input("Account Name", value="Perplexity AI, Inc.")
             account_type = st.text_input("Account Type", value="Checking")
-            routing_number = st.text_input("ACH Routing/ABA", value="")
 
         with col2:
-            account_number = st.text_input("Account Number", value="")
-            swift_code = st.text_input("Swift/IBAN", value="")
-            reference = st.text_input("Reference", value="")
+            routing_number = st.text_input("ACH Routing/ABA", value="121140399")
+            account_number = st.text_input("Account Number", value="3304334669")
+            swift_code = st.text_input("Swift/IBAN", value="SVBKUS6S")
 
         # Update button
         if st.button("🔄 Update Invoice", type="primary", use_container_width=True):
@@ -147,8 +145,7 @@ def main():
                         "account_type": account_type,
                         "routing_number": routing_number,
                         "account_number": account_number,
-                        "swift_code": swift_code,
-                        "reference": reference
+                        "swift_code": swift_code
                     }
 
                     # Modify the PDF
