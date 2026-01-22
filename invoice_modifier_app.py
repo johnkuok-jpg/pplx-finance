@@ -114,7 +114,7 @@ def main():
     )
 
     st.title("💳 Stripe Invoice Banking Information Updater")
-    st.markdown("Upload a Stripe-formatted invoice PDF and update the banking details")
+    st.markdown("Upload a Stripe invoice PDF to get started")
 
     # File uploader
     uploaded_file = st.file_uploader(
@@ -183,7 +183,7 @@ def main():
                         )
 
     else:
-        st.info("👆 Upload a PDF invoice to get started")
+        st.info("👆 Upload there")
 
     # Instructions
     with st.expander("ℹ️ How to use"):
