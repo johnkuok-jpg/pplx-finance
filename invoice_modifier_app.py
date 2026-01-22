@@ -60,8 +60,8 @@ def modify_invoice_pdf(pdf_bytes, bank_info):
 
     # Add new banking information
     y_start = delete_from_y + 12
-    x_label = 32
-    x_value = 150
+    x_label = 30
+    x_value = 148
     line_height = 12.5
     fontsize = 9
     fontname = "helv"
